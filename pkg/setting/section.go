@@ -35,5 +35,5 @@ func (s *Setting) ReadSection(k string, v interface{}) error {
 	if err != nil {
 		return err
 	}
-	return err
+	return nil
 }

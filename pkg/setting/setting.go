@@ -18,7 +18,6 @@ func NetSetting() (*Setting, error) {
 	vp.SetConfigType("yaml")
 
 	err := vp.ReadInConfig()
-	fmt.Println("vp", vp)
 
 	if err != nil {
 		return nil, err

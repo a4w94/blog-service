@@ -2,7 +2,7 @@ Server:
   RunMode: debug
   HttpPort: 8000
   ReadTimeout: 60
-  WriteTimeout:60
+  WriteTimeout: 60
 
 App:
   DefaultPageSize: 10
@@ -14,7 +14,7 @@ App:
 Database:
   DBType: mysql
   UserName: root
-  Password: root
+  Password: a4w941207
   Host: 127.0.0.1:3306
   DBName: blog_service
   TablePrefix: blog_
