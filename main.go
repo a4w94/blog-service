@@ -25,6 +25,7 @@ func init() {
 }
 
 func main() {
+
 	router := routers.NewRouter()
 	s := &http.Server{
 		Addr:           ":" + global.ServerSetting.HttpPort,
