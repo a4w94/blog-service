@@ -23,5 +23,5 @@ func NetSetting() (*Setting, error) {
 		return nil, err
 	}
 
-	return &Setting{vp}, err
+	return &Setting{vp}, nil
 }

@@ -3,9 +3,11 @@ package main
 import (
 	"blog_service/global"
 	"blog_service/internal/model"
+	"blog_service/internal/routers"
 	"blog_service/pkg/logger"
 	"blog_service/pkg/setting"
 	"log"
+	"net/http"
 	"time"
 
 	"github.com/natefinch/lumberjack/v3"
@@ -33,15 +35,15 @@ func main() {
 
 	global.Logger.Infof("%s: go-programing-tour-book/%s", "eddycjy", "blog-service")
 
-	// router := routers.NewRouter()
-	// s := &http.Server{
-	// 	Addr:           ":" + global.ServerSetting.HttpPort,
-	// 	Handler:        router,
-	// 	ReadTimeout:    global.ServerSetting.ReadTimeout,
-	// 	WriteTimeout:   global.ServerSetting.WriteTimeout,
-	// 	MaxHeaderBytes: 1 << 20,
-	// }
-	// s.ListenAndServe()
+	router := routers.NewRouter()
+	s := &http.Server{
+		Addr:           ":" + global.ServerSetting.HttpPort,
+		Handler:        router,
+		ReadTimeout:    global.ServerSetting.ReadTimeout,
+		WriteTimeout:   global.ServerSetting.WriteTimeout,
+		MaxHeaderBytes: 1 << 20,
+	}
+	s.ListenAndServe()
 
 }
 
