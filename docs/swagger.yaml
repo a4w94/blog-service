@@ -1,8 +1,18 @@
 definitions:
+  app.Pager:
+    properties:
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total_rows:
+        type: integer
+    type: object
   errorcode.Error:
     type: object
   model.Tag:
     properties:
+      conent: {}
       created_by:
         type: string
       created_on:
@@ -22,6 +32,15 @@ definitions:
       state:
         type: integer
     type: object
+  model.TagSwagger:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/model.Tag'
+        type: array
+      pager:
+        $ref: '#/definitions/app.Pager'
+    type: object
 info:
   contact: {}
   description: 部落格建立
@@ -34,9 +53,14 @@ paths:
       parameters:
       - description: 標籤名稱
         in: query
+        maxLength: 100
         name: name
         type: string
-      - description: 狀態
+      - default: 1
+        description: 狀態
+        enum:
+        - 0
+        - 1
         in: query
         name: state
         type: integer
@@ -54,7 +78,7 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/model.Tag'
+            $ref: '#/definitions/model.TagSwagger'
         "400":
           description: 請求錯誤
           schema:
@@ -68,17 +92,23 @@ paths:
       parameters:
       - description: 標籤名稱
         in: body
+        maxLength: 100
         name: name
         required: true
         schema:
           type: string
-      - description: 狀態
+      - default: 1
+        description: 狀態
+        enum:
+        - 0
+        - 1
         in: body
         name: state
         schema:
           type: integer
       - description: 建立者
         in: body
+        maxLength: 100
         name: created_by
         required: true
         schema:
@@ -89,7 +119,7 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/model.Tag'
+            $ref: '#/definitions/model.TagSwagger'
         "400":
           description: 請求錯誤
           schema:
@@ -113,7 +143,7 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/model.Tag'
+            $ref: '#/definitions/model.TagSwagger'
         "400":
           description: 請求錯誤
           schema:
@@ -132,16 +162,22 @@ paths:
         type: integer
       - description: 標籤名稱
         in: body
+        maxLength: 100
         name: name
         schema:
           type: string
-      - description: 狀態
+      - default: 1
+        description: 狀態
+        enum:
+        - 0
+        - 1
         in: body
         name: state
         schema:
           type: integer
       - description: 修改者
         in: body
+        maxLength: 100
         name: modified_by
         required: true
         schema:
@@ -152,7 +188,7 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/model.Tag'
+            $ref: '#/definitions/model.TagSwagger'
         "400":
           description: 請求錯誤
           schema:

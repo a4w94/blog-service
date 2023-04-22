@@ -25,13 +25,19 @@ const docTemplate = `{
                 "summary": "取得多個標籤",
                 "parameters": [
                     {
+                        "maxLength": 100,
                         "type": "string",
                         "description": "標籤名稱",
                         "name": "name",
                         "in": "query"
                     },
                     {
+                        "enum": [
+                            0,
+                            1
+                        ],
                         "type": "integer",
+                        "default": 1,
                         "description": "狀態",
                         "name": "state",
                         "in": "query"
@@ -53,7 +59,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/model.Tag"
+                            "$ref": "#/definitions/model.TagSwagger"
                         }
                     },
                     "400": {
@@ -77,6 +83,7 @@ const docTemplate = `{
                 "summary": "新增標籤",
                 "parameters": [
                     {
+                        "maxLength": 100,
                         "description": "標籤名稱",
                         "name": "name",
                         "in": "body",
@@ -86,6 +93,11 @@ const docTemplate = `{
                         }
                     },
                     {
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "default": 1,
                         "description": "狀態",
                         "name": "state",
                         "in": "body",
@@ -94,6 +106,7 @@ const docTemplate = `{
                         }
                     },
                     {
+                        "maxLength": 100,
                         "description": "建立者",
                         "name": "created_by",
                         "in": "body",
@@ -107,7 +120,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/model.Tag"
+                            "$ref": "#/definitions/model.TagSwagger"
                         }
                     },
                     "400": {
@@ -140,6 +153,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
+                        "maxLength": 100,
                         "description": "標籤名稱",
                         "name": "name",
                         "in": "body",
@@ -148,6 +162,11 @@ const docTemplate = `{
                         }
                     },
                     {
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "default": 1,
                         "description": "狀態",
                         "name": "state",
                         "in": "body",
@@ -156,6 +175,7 @@ const docTemplate = `{
                         }
                     },
                     {
+                        "maxLength": 100,
                         "description": "修改者",
                         "name": "modified_by",
                         "in": "body",
@@ -169,7 +189,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/model.Tag"
+                            "$ref": "#/definitions/model.TagSwagger"
                         }
                     },
                     "400": {
@@ -204,7 +224,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/model.Tag"
+                            "$ref": "#/definitions/model.TagSwagger"
                         }
                     },
                     "400": {
@@ -224,12 +244,27 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "app.Pager": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "total_rows": {
+                    "type": "integer"
+                }
+            }
+        },
         "errorcode.Error": {
             "type": "object"
         },
         "model.Tag": {
             "type": "object",
             "properties": {
+                "conent": {},
                 "created_by": {
                     "type": "string"
                 },
@@ -256,6 +291,20 @@ const docTemplate = `{
                 },
                 "state": {
                     "type": "integer"
+                }
+            }
+        },
+        "model.TagSwagger": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Tag"
+                    }
+                },
+                "pager": {
+                    "$ref": "#/definitions/app.Pager"
                 }
             }
         }
