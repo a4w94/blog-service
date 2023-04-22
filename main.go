@@ -31,6 +31,10 @@ func init() {
 
 }
 
+// @title 部落格系統
+// @version 1.0
+// @description 部落格建立
+// @termsOfService https://github.com/go-programing-tour-book
 func main() {
 
 	global.Logger.Infof("%s: go-programing-tour-book/%s", "eddycjy", "blog-service")
@@ -43,6 +47,7 @@ func main() {
 		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
+	log.Printf("Url: http://127.0.0.1:%s", global.ServerSetting.HttpPort)
 	s.ListenAndServe()
 
 }

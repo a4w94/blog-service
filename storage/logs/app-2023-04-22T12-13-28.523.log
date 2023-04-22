@@ -1,0 +1,3 @@
+2023/04/22 12:01:33 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1682136093869147400}
+2023/04/22 12:02:17 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1682136137121263400}
+2023/04/22 12:09:16 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1682136556235468600}
