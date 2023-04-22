@@ -1,6 +1,10 @@
 package v1
 
 import (
+	"blog_service/global"
+	"blog_service/pkg/app"
+	"blog_service/pkg/errorcode"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,6 +32,22 @@ func (r Tag) Get(c *gin.Context) {
 // @Failure 500 {object} errorcode.Error "內部錯誤"
 // @Router /api/v1/tags [get]
 func (r Tag) List(c *gin.Context) {
+	param := struct {
+		Name  string `form:"name" binding:"max=100"`
+		State uint8  `form:"state,default=1" binding:"eq=0|eq=1"`
+	}{}
+	respons := app.NewResponse(c)
+
+	valid, errs := app.BindAndValid(c, &param)
+
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
+		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
+		respons.ToErrorResponse(errRsp)
+		return
+	}
+
+	respons.ToResponse(gin.H{})
 
 }
 
