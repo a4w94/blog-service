@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"blog_service/vendor/github.com/gin-gonic/gin/binding"
+	"github.com/gin-gonic/gin/binding"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/locales/en"
@@ -29,10 +29,9 @@ func Translations() gin.HandlerFunc {
 				break
 			case "en":
 				_ = en_translations.RegisterDefaultTranslations(v, trans)
-				break
+
 			default:
 				_ = en_translations.RegisterDefaultTranslations(v, trans)
-				break
 
 			}
 			c.Set("trans", trans)

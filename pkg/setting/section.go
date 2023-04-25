@@ -1,6 +1,9 @@
 package setting
 
-import "time"
+import (
+	"blog_service/vendor/github.com/dgrijalva/jwt-go"
+	"time"
+)
 
 type ServerSettings struct {
 	RunMode      string
@@ -28,6 +31,14 @@ type DatabaseSettings struct {
 	ParseTime    bool
 	MaxIdleConns int
 	MaxOpenConns int
+}
+type JWTSettings struct {
+	Sub    string
+	Name   string
+	Admin  bool
+	Secret string
+	Expire time.Duration
+	*jwt.StandardClaims
 }
 
 func (s *Setting) ReadSection(k string, v interface{}) error {

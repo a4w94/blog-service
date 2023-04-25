@@ -22,3 +22,8 @@ Database:
   ParseTime: True
   MaxIdleConns: 10
   MaxOpenConns: 30
+
+JWT:
+  Secret: a4w941207
+  Issuer: blog-service
+  Expire: 7200

@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"blog_service/internal/middleware"
 	v1 "blog_service/internal/routers/v1"
 
 	_ "blog_service/docs"
@@ -15,6 +16,7 @@ func NewRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	r.Use(middleware.Translations())
 	url := ginSwagger.URL("http://127.0.0.1:8000/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, url))
 	tag := v1.NewTag()
