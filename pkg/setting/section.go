@@ -1,8 +1,9 @@
 package setting
 
 import (
-	"blog_service/vendor/github.com/dgrijalva/jwt-go"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type ServerSettings struct {
@@ -37,6 +38,8 @@ type JWTSettings struct {
 	Name   string
 	Admin  bool
 	Secret string
+
+	//簽證留存時間
 	Expire time.Duration
 	*jwt.StandardClaims
 }

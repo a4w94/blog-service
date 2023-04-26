@@ -1,2 +1,0 @@
-2023/04/22 22:59:48 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid errs: Key: 'State' Error:Field validation for 'State' failed on the 'oneof' tag","time":1682175588547978800}
-2023/04/22 22:59:51 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid errs: Key: 'State' Error:Field validation for 'State' failed on the 'oneof' tag","time":1682175591459221700}

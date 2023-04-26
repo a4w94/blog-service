@@ -1,3 +1,0 @@
-2023/04/22 22:06:52 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1682172412299193200}
-2023/04/22 22:57:16 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1682175436391749300}
-2023/04/22 22:59:00 {"callers":["C:/Go/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid errs: Key: 'State' Error:Field validation for 'State' failed on the 'oneof' tag","time":1682175540017850700}
