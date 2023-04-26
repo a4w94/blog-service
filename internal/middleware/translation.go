@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"blog_service/vendor/github.com/gin-gonic/gin/binding"
+	"github.com/gin-gonic/gin/binding"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/locales/en"
@@ -12,10 +12,10 @@ import (
 	"github.com/go-playground/validator/v10"
 
 	en_translations "github.com/go-playground/validator/v10/translations/en"
-	//zh_translations "github.com/go-playground/validator/v10/translations/zh"
+	zh_translations "github.com/go-playground/validator/v10/translations/zh"
 )
 
-//多語言功能 目前語言zh,en
+// 多語言功能 目前語言zh,en
 func Translations() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		uni := ut.New(en.New(), zh.New(), zh_Hant_TW.New())
@@ -25,14 +25,13 @@ func Translations() gin.HandlerFunc {
 		if ok {
 			switch locale {
 			case "zh":
-				//_ = zh_translations.RegisterDefaultTranslations(v, trans)
-				break
+				_ = zh_translations.RegisterDefaultTranslations(v, trans)
+
 			case "en":
 				_ = en_translations.RegisterDefaultTranslations(v, trans)
-				break
+
 			default:
 				_ = en_translations.RegisterDefaultTranslations(v, trans)
-				break
 
 			}
 			c.Set("trans", trans)
