@@ -2,8 +2,6 @@ package setting
 
 import (
 	"time"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 type ServerSettings struct {
@@ -34,14 +32,11 @@ type DatabaseSettings struct {
 	MaxOpenConns int
 }
 type JWTSettings struct {
-	Sub    string
-	Name   string
-	Admin  bool
 	Secret string
-
+	//簽發者
+	Issuer string
 	//簽證留存時間
 	Expire time.Duration
-	*jwt.StandardClaims
 }
 
 func (s *Setting) ReadSection(k string, v interface{}) error {

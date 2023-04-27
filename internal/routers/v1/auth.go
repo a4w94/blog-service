@@ -5,21 +5,24 @@ import (
 	"blog_service/internal/service"
 	"blog_service/pkg/app"
 	"blog_service/pkg/errorcode"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetAuth(c *gin.Context) {
 	param := service.AuthRequest{}
+
+	c.ShouldBind(&param)
+	fmt.Println("param:", param)
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		global.Logger.Errorf("app.BindAndValid err: %v", errs)
+		global.Logger.Infof("params %v", param)
 		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
 		response.ToErrorResponse(errRsp)
 		return
-	} else {
-		global.Logger.Infof("params %v", param)
 	}
 
 	//判斷是否存在
