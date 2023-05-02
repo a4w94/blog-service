@@ -31,6 +31,7 @@ func GetPageSize(c *gin.Context) int {
 	return pageSize
 }
 
+// 计算分页查询时需要跳过的记录数量
 func GetPageOffset(page, pageSize int) int {
 	result := 0
 	if page > 0 {
