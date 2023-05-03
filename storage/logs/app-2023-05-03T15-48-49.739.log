@@ -1,0 +1,2 @@
+2023/05/03 14:58:56 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"svc.CreateTag error: Error 1054: Unknown column 'deleted_on' in 'field list'","time":1683097136702308000}
+2023/05/03 15:48:45 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1683100125712921000}

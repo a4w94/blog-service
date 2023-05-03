@@ -4,6 +4,7 @@ import (
 	"blog_service/global"
 	"blog_service/internal/service"
 	"blog_service/pkg/app"
+	"blog_service/pkg/convert"
 	"blog_service/pkg/errorcode"
 	"fmt"
 
@@ -83,7 +84,6 @@ func (r Tag) Create(c *gin.Context) {
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
-		fmt.Println(param)
 		global.Logger.Errorf("app.BindAndValid err: %v", errs)
 		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
 		response.ToErrorResponse(errRsp)
@@ -112,9 +112,13 @@ func (r Tag) Create(c *gin.Context) {
 // @Failure 500 {object} errorcode.Error "內部錯誤"
 // @Router /api/v1/tags/{id} [put]
 func (r Tag) Update(c *gin.Context) {
-	param := service.UpdateTagRequest{}
+	param := service.UpdateTagRequest{
+		ID: convert.StrTo.MustUInt32(convert.StrTo(c.Param("id"))),
+	}
+
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
+	fmt.Println(param.ID)
 	if !valid {
 		global.Logger.Errorf("app.BindAndValid err: %v", errs)
 		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
@@ -140,7 +144,9 @@ func (r Tag) Update(c *gin.Context) {
 // @Failure 500 {object} errorcode.Error "內部錯誤"
 // @Router /api/v1/tags/{id} [delete]
 func (r Tag) Delete(c *gin.Context) {
-	param := service.DeleteTagRequest{}
+	param := service.DeleteTagRequest{
+		ID: convert.StrTo.MustUInt32(convert.StrTo(c.Param("id"))),
+	}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {

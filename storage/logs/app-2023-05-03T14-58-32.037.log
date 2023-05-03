@@ -1,0 +1,2 @@
+2023/05/03 14:58:29 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1683097109542378000}
+2023/05/03 14:58:32 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: State must be one of [01]","time":1683097112035818000}

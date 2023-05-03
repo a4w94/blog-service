@@ -1,0 +1,2 @@
+2023/05/03 16:05:12 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: ID is a required field","time":1683101112731031000}
+2023/05/03 16:07:04 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1683101224816134000}

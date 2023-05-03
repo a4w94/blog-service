@@ -1,7 +1,6 @@
 package app
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -39,8 +38,7 @@ func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 
 	//c.ShouldBind()方法，該方法從請求的form或querystring中綁定值
 	err := c.ShouldBind(v)
-	fmt.Println(&c)
-	fmt.Println(v)
+
 	if err != nil {
 		v := c.Value("trans")
 		trans, _ := v.(ut.Translator)
