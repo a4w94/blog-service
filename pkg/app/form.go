@@ -33,10 +33,10 @@ func (v ValidErrors) Errors() []string {
 	return errs
 }
 
+// 參數綁定&導入參數驗證
 func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 	var errs ValidErrors
 
-	//參數綁定&導入參數驗證
 	//c.ShouldBind()方法，該方法從請求的form或querystring中綁定值
 	err := c.ShouldBind(v)
 	fmt.Println(&c)

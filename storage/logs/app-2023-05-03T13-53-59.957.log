@@ -1,0 +1,2 @@
+2023/05/03 13:52:25 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"svc.CreateTag error: Error 1054: Unknown column 'deleted_on' in 'field list'","time":1683093145312109000}
+2023/05/03 13:53:59 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: CreatedBy is a required field,State must be one of [01]","time":1683093239955762000}
