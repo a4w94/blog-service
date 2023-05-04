@@ -1,2 +1,0 @@
-2023/05/03 15:48:49 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"svc.CreateTag error: Error 1054: Unknown column 'conent' in 'field list'","time":1683100129739056000}
-2023/05/03 15:52:37 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1683100357655166000}

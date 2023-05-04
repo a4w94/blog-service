@@ -20,9 +20,11 @@ func NewRouter() *gin.Engine {
 	url := ginSwagger.URL("http://127.0.0.1:8000/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, url))
 	r.POST("/auth", v1.GetAuth)
+
+	upload := NewUpload()
+	r.POST("/upload/file", upload.UploadFile)
 	tag := v1.NewTag()
 	article := v1.NewArticle()
-
 	apiv1 := r.Group("/api/v1")
 	//apiv1.Use(middleware.JWT())
 	{

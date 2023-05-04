@@ -37,6 +37,7 @@ func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 	var errs ValidErrors
 
 	//c.ShouldBind()方法，該方法從請求的form或querystring中綁定值
+	//c.ShouldBind 則會根據 Content-Type Header，自動選擇對應的綁定器，可以用於綁定 JSON、XML、ProtoBuf、Form、Query 等多種格式的請求內容
 	err := c.ShouldBind(v)
 
 	if err != nil {

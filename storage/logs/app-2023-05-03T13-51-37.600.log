@@ -1,2 +1,0 @@
-2023/05/03 12:36:57 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: State must be one of [01]","time":1683088617114252000}
-2023/05/03 12:36:57 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"svc.CreateTag error: Error 1054: Unknown column 'deleted_on' in 'field list'","time":1683088617136677000}

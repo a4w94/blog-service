@@ -2,10 +2,10 @@ package app
 
 import (
 	"blog_service/global"
+	"blog_service/pkg/util"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/fylr/go-gin-example/pkg/util"
 )
 
 type Claims struct {

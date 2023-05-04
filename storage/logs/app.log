@@ -1,1 +1,2 @@
 2023/05/03 16:55:27 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1683104127114899000}
+2023/05/04 17:20:43 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1683192043241719000}

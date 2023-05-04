@@ -1,2 +1,0 @@
-2023/05/03 16:02:49 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: ID is a required field","time":1683100969268074000}
-2023/05/03 16:02:57 {"callers":["/Users/terry_hsiesh/Side Project/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: ID is a required field","time":1683100977034009000}
