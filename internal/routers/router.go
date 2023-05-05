@@ -1,8 +1,10 @@
 package routers
 
 import (
+	"blog_service/global"
 	"blog_service/internal/middleware"
 	v1 "blog_service/internal/routers/v1"
+	"net/http"
 
 	_ "blog_service/docs"
 
@@ -23,6 +25,14 @@ func NewRouter() *gin.Engine {
 
 	upload := NewUpload()
 	r.POST("/upload/file", upload.UploadFile)
+
+	//訪問http://127.0.0.1:8000/static/ 查看所有資源
+	//長傳加密後檔名
+	//curl -X POST http://127.0.0.1:8000/upload/file \
+	//-F file=@/Users/terry_hsiesh/Side\ Project/blog-service/storage/uploads/go.png \
+	//-F type=1
+	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
+
 	tag := v1.NewTag()
 	article := v1.NewArticle()
 	apiv1 := r.Group("/api/v1")
