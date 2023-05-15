@@ -30,6 +30,16 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettings) (*gorm.DB, error) {
 		databaseSetting.Charset,
 		databaseSetting.ParseTime,
 	)
+
+	// s := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=%t&loc=Local",
+	// 	databaseSetting.UserName,
+	// 	databaseSetting.PassWord,
+	// 	os.Getenv("DB_HOST"),
+	// 	os.Getenv("DB_PORT"),
+	// 	databaseSetting.DBName,
+	// 	databaseSetting.Charset,
+	// 	databaseSetting.ParseTime,
+	// )
 	log.Println("DB 連線位置: ", s)
 	db, err := gorm.Open(databaseSetting.DBType, s)
 

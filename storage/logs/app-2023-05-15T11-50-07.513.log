@@ -1,0 +1,2 @@
+2023/05/15 11:49:58 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1684122598766959000}
+2023/05/15 11:50:07 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: AppKey is a required field,AppSecret is a required field","time":1684122607513051000}

@@ -31,10 +31,6 @@ github.com/dgrijalva/jwt-go
 # github.com/fsnotify/fsnotify v1.6.0
 ## explicit; go 1.16
 github.com/fsnotify/fsnotify
-# github.com/fylr/go-gin-example v0.0.0-20200213075942-452dc01a05ab
-## explicit; go 1.13
-github.com/fylr/go-gin-example/pkg/setting
-github.com/fylr/go-gin-example/pkg/util
 # github.com/gin-contrib/sse v0.1.0
 ## explicit; go 1.12
 github.com/gin-contrib/sse
@@ -45,9 +41,6 @@ github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/internal/bytesconv
 github.com/gin-gonic/gin/internal/json
 github.com/gin-gonic/gin/render
-# github.com/go-ini/ini v1.32.1-0.20180214101753-32e4be5f41bb
-## explicit
-github.com/go-ini/ini
 # github.com/go-openapi/jsonpointer v0.19.6
 ## explicit; go 1.13
 github.com/go-openapi/jsonpointer
@@ -90,6 +83,8 @@ github.com/goccy/go-json/internal/encoder/vm_color_indent
 github.com/goccy/go-json/internal/encoder/vm_indent
 github.com/goccy/go-json/internal/errors
 github.com/goccy/go-json/internal/runtime
+# github.com/golang/protobuf v1.5.3
+## explicit; go 1.9
 # github.com/hashicorp/hcl v1.0.0
 ## explicit
 github.com/hashicorp/hcl
@@ -123,6 +118,8 @@ github.com/klauspost/cpuid/v2
 # github.com/leodido/go-urn v1.2.3
 ## explicit; go 1.16
 github.com/leodido/go-urn
+# github.com/lib/pq v1.2.0
+## explicit
 # github.com/magiconair/properties v1.8.7
 ## explicit; go 1.19
 github.com/magiconair/properties
@@ -214,9 +211,6 @@ github.com/twitchyliquid64/golang-asm/unsafeheader
 # github.com/ugorji/go/codec v1.2.11
 ## explicit; go 1.11
 github.com/ugorji/go/codec
-# github.com/unknwon/com v1.0.1
-## explicit
-github.com/unknwon/com
 # golang.org/x/arch v0.3.0
 ## explicit; go 1.17
 golang.org/x/arch/x86/x86asm
@@ -260,6 +254,10 @@ golang.org/x/tools/internal/typeparams
 # google.golang.org/appengine v1.6.7
 ## explicit; go 1.11
 google.golang.org/appengine/cloudsql
+# google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
+## explicit; go 1.19
+# google.golang.org/grpc v1.55.0
+## explicit; go 1.17
 # google.golang.org/protobuf v1.30.0
 ## explicit; go 1.11
 google.golang.org/protobuf/encoding/protowire

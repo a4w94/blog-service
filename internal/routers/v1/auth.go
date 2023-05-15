@@ -5,16 +5,28 @@ import (
 	"blog_service/internal/service"
 	"blog_service/pkg/app"
 	"blog_service/pkg/errorcode"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetAuth(c *gin.Context) {
-	param := service.AuthRequest{}
+	appKey := c.GetHeader("app_key")
+	appSecret := c.GetHeader("app_secret")
 
-	c.ShouldBind(&param)
-	fmt.Println("param:", param)
+	//確保appKey&appSecret存在
+	if appKey == "" || appSecret == "" {
+		response := app.NewResponse(c)
+		response.ToErrorResponse(errorcode.InvalidParams.WithDetails("appKey or appSecret is empty"))
+		return
+	}
+
+	param := service.AuthRequest{
+		AppKey:    appKey,
+		AppSecret: appSecret,
+	}
+
+	//c.ShouldBindHeader(&param)
+
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {

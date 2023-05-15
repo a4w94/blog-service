@@ -1,0 +1,2 @@
+2023/05/15 11:40:59 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"error","message":"svc.ChckcAuth err: auth info does not exist","time":1684122059662684000}
+2023/05/15 11:44:35 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1684122275768893000}

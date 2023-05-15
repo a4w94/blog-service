@@ -25,7 +25,7 @@ func (t Tag) TableName() string {
 func (t Tag) Count(db *gorm.DB) (int, error) {
 	var count int
 	if t.Name != "" {
-		db.Where("name = ?", t.Name)
+		db = db.Where("name = ?", t.Name)
 
 	}
 	db = db.Where("state = ?", t.State)
@@ -41,16 +41,16 @@ func (t Tag) List(db *gorm.DB, pageOffset, pageSize int) ([]*Tag, error) {
 	var err error
 
 	if pageOffset > 0 && pageSize > 0 {
-		db.Offset(pageOffset).Limit(pageSize)
+		db = db.Offset(pageOffset).Limit(pageSize)
 	}
 
 	if t.Name != "" {
-		db.Where("name = ?", t.Name)
+		db = db.Where("name = ?", t.Name)
 	}
 
 	db = db.Where("state = ?", t.State)
 
-	if err = db.Model(&tags).Where("is_del = ?", 0).Error; err != nil {
+	if err = db.Model(&tags).Where("is_del = ?", 0).Find(&tags).Error; err != nil {
 		return nil, err
 	}
 
@@ -63,11 +63,9 @@ func (t Tag) Create(db *gorm.DB) error {
 }
 
 func (t Tag) Update(db *gorm.DB, values interface{}) error {
-	err := db.Model(&Tag{}).Where("id = ? AND is_del = ?", t.ID, 0).Update(values).Error
-	if err != nil {
-		return err
-	}
-	return nil
+	db = db.Model(&Tag{}).Where("id = ? AND is_del = ?", t.ID, 0).Update(values)
+
+	return db.Error
 }
 
 func (t Tag) Delete(db *gorm.DB) error {

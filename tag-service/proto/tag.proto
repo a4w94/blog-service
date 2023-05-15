@@ -1,0 +1,32 @@
+syntax="proto3";
+
+//export PATH=$PATH:/Users/terry_hsiesh/go/bin
+//需指定路徑 執行protoc --go_out=. --go-grpc_out=. ./proto/*.proto
+
+option go_package = "./proto";
+
+
+package proto;
+
+import "proto/common.proto";
+
+service TagService {
+    rpc GetTagList (GetTagListRequest) returns (GetTagListReply);
+}
+
+message GetTagListRequest {
+    string name=1;
+    uint32 state=2;
+}
+
+message Tag {
+int64 id=1;
+string name=2;
+uint32 state=3;
+
+}
+
+message GetTagListReply {
+    repeated Tag list=1;
+    Pager pager=2;
+}
