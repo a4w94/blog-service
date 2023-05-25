@@ -6,9 +6,9 @@ import (
 )
 
 type Error struct {
-	code    int      `json:"code"`
-	msg     string   `json:"msg"`
-	details []string `json:"details"`
+	Code_    int      `json:"code"`
+	Msg_     string   `json:"msg"`
+	Details_ []string `json:"details"`
 }
 
 var codes = map[int]string{}
@@ -19,7 +19,7 @@ func NewError(code int, msg string) *Error {
 	}
 	codes[code] = msg
 
-	return &Error{code: code, msg: msg}
+	return &Error{Code_: code, Msg_: msg}
 }
 
 func (e *Error) Error() string {
@@ -27,47 +27,47 @@ func (e *Error) Error() string {
 }
 
 func (e *Error) Code() int {
-	return e.code
+	return e.Code_
 }
 
 func (e *Error) Msg() string {
-	return e.msg
+	return e.Msg_
 }
 
 func (e *Error) Msgf(args []interface{}) string {
-	return fmt.Sprintf(e.msg, args...)
+	return fmt.Sprintf(e.Msg_, args...)
 }
 
 func (e *Error) Details() []string {
-	return e.details
+	return e.Details_
 }
 
 func (e *Error) WithDetails(details ...string) *Error {
 	newError := *e
-	newError.details = []string{}
+	newError.Details_ = []string{}
 
-	newError.details = append(newError.details, details...)
+	newError.Details_ = append(newError.Details_, details...)
 
 	return &newError
 }
 
 func (e *Error) StatusCode() int {
-	switch e.code {
-	case Success.code:
+	switch e.Code_ {
+	case Success.Code_:
 		return http.StatusOK
-	case ServerError.code:
+	case ServerError.Code_:
 		return http.StatusInternalServerError
-	case InvalidParams.code:
+	case InvalidParams.Code_:
 		return http.StatusBadRequest
-	case UnauthorizedAuthNotExist.code:
+	case UnauthorizedAuthNotExist.Code_:
 		fallthrough
-	case UnauthorizedTokenError.code:
+	case UnauthorizedTokenError.Code_:
 		fallthrough
-	case UnauthorizedTokenGenerate.code:
+	case UnauthorizedTokenGenerate.Code_:
 		fallthrough
-	case UnauthorizedTokenTimeout.code:
+	case UnauthorizedTokenTimeout.Code_:
 		return http.StatusUnauthorized
-	case TooManyRequests.code:
+	case TooManyRequests.Code_:
 		return http.StatusTooManyRequests
 	}
 
