@@ -1,5 +1,5 @@
-# github.com/fullstorydev/grpcurl v1.8.7
-## explicit; go 1.15
+# 9fans.net/go v0.0.4
+## explicit; go 1.13
 # github.com/golang/protobuf v1.5.3
 ## explicit; go 1.9
 github.com/golang/protobuf/jsonpb
@@ -8,8 +8,18 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/jhump/protoreflect v1.12.0
+# github.com/lukehoban/go-find-references v0.0.0-20150918174914-42505ef666d1
+## explicit
+# github.com/lukehoban/ident v0.0.0-20161021214352-ec6acfba39eb
+## explicit
+# github.com/nsf/gocode v0.0.0-20230322162601-b672b49f3818
+## explicit
+# github.com/rogpeppe/godef v1.1.2
 ## explicit; go 1.13
+# github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518
+## explicit
+# golang.org/x/mod v0.10.0
+## explicit; go 1.17
 # golang.org/x/net v0.10.0
 ## explicit; go 1.17
 golang.org/x/net/http/httpguts
@@ -27,6 +37,8 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
+# golang.org/x/tools v0.9.1
+## explicit; go 1.18
 # google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1
 ## explicit; go 1.19
 google.golang.org/genproto/googleapis/rpc/status
@@ -116,3 +128,5 @@ google.golang.org/protobuf/types/descriptorpb
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
+# sourcegraph.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518
+## explicit

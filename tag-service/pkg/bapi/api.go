@@ -25,6 +25,7 @@ func NewAPI(url string) *API {
 	return &API{URL: url}
 }
 
+// 請求標籤列表api實現
 func (a *API) GetTagList(ctx context.Context, name string) ([]byte, error) {
 	token, err := a.getAccessToken(ctx)
 	if err != nil {

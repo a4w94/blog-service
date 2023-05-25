@@ -16,7 +16,7 @@ func GetAuth(c *gin.Context) {
 	//確保appKey&appSecret存在
 	if appKey == "" || appSecret == "" {
 		response := app.NewResponse(c)
-		response.ToErrorResponse(errorcode.InvalidParams.WithDetails("appKey or appSecret is empty"))
+		response.ToErrorResponse(errorcode.InvalidParams.WithDetails("app_key or app_secret is empty"))
 		return
 	}
 
