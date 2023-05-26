@@ -26,7 +26,7 @@ func init() {
 
 	err = setupLogger()
 	if err != nil {
-		log.Fatalf("init.setupLooger err: %v", err)
+		log.Fatalf("init.setupLogger err: %v", err)
 	}
 
 }
@@ -37,7 +37,7 @@ func init() {
 // @termsOfService https://github.com/go-programing-tour-book
 func main() {
 
-	global.Logger.Infof("%s: go-programing-tour-book/%s", "eddycjy", "blog-service")
+	//global.Logger.Infof("%s: go-programing-tour-book/%s", "eddycjy", "blog-service")
 
 	router := routers.NewRouter()
 	s := &http.Server{
@@ -82,6 +82,11 @@ func setupSetting() error {
 	}
 	global.JWTSetting.Expire *= time.Second
 
+	err = setting.ReadSection("Email", &global.EmailSetting)
+	if err != nil {
+		return err
+	}
+
 	return nil
 
 }
@@ -107,7 +112,7 @@ func setupLogger() error {
 	if err != nil {
 		log.Fatal("lumberjack failed")
 	}
-	global.Logger = logger.NewLogger(writer, "", log.LstdFlags).WithCaller(2)
+	global.Logger = logger.NewLogger(writer, "", log.LstdFlags).WithCaller(4)
 
 	return nil
 

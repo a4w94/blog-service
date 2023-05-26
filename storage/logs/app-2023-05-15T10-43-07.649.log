@@ -1,2 +1,0 @@
-2023/05/15 10:28:10 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: CreatedBy is a required field","time":1684117690208806000}
-2023/05/15 10:39:56 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"info","message":"eddycjy: go-programing-tour-book/blog-service","time":1684118396576327000}

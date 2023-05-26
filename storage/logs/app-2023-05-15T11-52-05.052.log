@@ -1,3 +1,0 @@
-2023/05/15 11:50:07 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"info","message":"params { }","time":1684122607513124000}
-2023/05/15 11:50:33 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"error","message":"app.BindAndValid err: AppKey is a required field,AppSecret is a required field","time":1684122633020124000}
-2023/05/15 11:50:33 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 27 main.init.0"],"level":"info","message":"params { }","time":1684122633020171000}

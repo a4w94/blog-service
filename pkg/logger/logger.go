@@ -58,14 +58,14 @@ func (l *Logger) clone() *Logger {
 	return &nl
 }
 
-//設定記錄檔公共欄位
+// 設定記錄檔公共欄位
 func (l *Logger) WithLevel(level Level) *Logger {
 	ll := l.clone()
 
 	return ll
 }
 
-//設定記錄檔公共欄位
+// 設定記錄檔公共欄位
 func (l *Logger) WithFields(f Fields) *Logger {
 	ll := l.clone()
 	if ll.fields == nil {
@@ -75,18 +75,17 @@ func (l *Logger) WithFields(f Fields) *Logger {
 	for k, v := range f {
 		ll.fields[k] = v
 	}
-
 	return ll
 }
 
-//設定記錄檔內容屬性
+// 設定記錄檔內容屬性
 func (l *Logger) WithContext(ctx context.Context) *Logger {
 	ll := l.clone()
 	ll.ctx = ctx
 	return ll
 }
 
-//設定目前某一層呼叫堆疊的資訊(程式計數器,檔案資訊,行號)
+// 設定目前某一層呼叫堆疊的資訊(程式計數器,檔案資訊,行號)
 func (l *Logger) WithCaller(skip int) *Logger {
 	ll := l.clone()
 
@@ -100,7 +99,7 @@ func (l *Logger) WithCaller(skip int) *Logger {
 	return ll
 }
 
-//設定目前的整個呼叫堆疊資訊
+// 設定目前的整個呼叫堆疊資訊
 func (l *Logger) WithCallerFrames() *Logger {
 	maxCallerDepth := 25
 	minCallerDepth := 1
@@ -124,7 +123,7 @@ func (l *Logger) WithCallerFrames() *Logger {
 	return ll
 }
 
-//記錄檔內容格式化為json
+// 記錄檔內容格式化為json
 func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} {
 	data := make(Fields, len(l.fields)+4)
 	data["level"] = level.String()
@@ -142,7 +141,7 @@ func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} 
 	return data
 }
 
-//記錄檔輸出
+// 記錄檔輸出
 func (l *Logger) Output(level Level, message string) {
 	body, _ := json.Marshal(l.JSONFormat(level, message))
 	content := string(body)
