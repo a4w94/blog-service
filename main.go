@@ -4,8 +4,10 @@ import (
 	"blog_service/global"
 	"blog_service/internal/model"
 	"blog_service/internal/routers"
+	"blog_service/pkg/email"
 	"blog_service/pkg/logger"
 	"blog_service/pkg/setting"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -67,6 +69,7 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+	global.AppSetting.DefaultContextTimeout *= time.Second
 
 	err = setting.ReadSection("Database", &global.DatabaseSetting)
 	if err != nil {
@@ -86,6 +89,9 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+
+	fmt.Println("啟用email 測試")
+	//emailTest()
 
 	return nil
 
@@ -116,4 +122,26 @@ func setupLogger() error {
 
 	return nil
 
+}
+
+func emailTest() {
+	defailMailer := email.NewEmail(&email.SMTPInfo{
+		Host:     global.EmailSetting.Host,
+		Port:     global.EmailSetting.Port,
+		IsSSL:    global.EmailSetting.IsSSL,
+		UserName: global.EmailSetting.UserName,
+		Password: global.EmailSetting.Password,
+		From:     global.EmailSetting.From,
+	},
+	)
+
+	err := defailMailer.SendEmail(
+		global.EmailSetting.To,
+		fmt.Sprintf("例外拋出，發生時間：%d", time.Now().Unix()),
+		fmt.Sprintf("錯誤訊息：%v"),
+	)
+
+	if err != nil {
+		panic(err)
+	}
 }

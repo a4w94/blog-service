@@ -9,6 +9,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.12.0
 	github.com/jinzhu/gorm v1.9.12
+	github.com/juju/ratelimit v1.0.2
 	github.com/natefinch/lumberjack/v3 v3.0.0-alpha
 	github.com/spf13/viper v1.15.0
 	github.com/swaggo/files v1.0.1

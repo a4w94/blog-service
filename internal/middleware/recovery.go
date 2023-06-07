@@ -22,6 +22,7 @@ func Recovery() gin.HandlerFunc {
 		From:     global.EmailSetting.From,
 	},
 	)
+	
 	return func(ctx *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {

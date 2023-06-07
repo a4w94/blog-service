@@ -17,6 +17,7 @@ App:
     - .jpg
     - .jpeg
     - .png
+  DefaultContextTimeout: 60
 
 Database:
   DBType: mysql
@@ -36,11 +37,11 @@ JWT:
   Expire: 7200
 
 Email:
-  Host: smtp.qq.com
+  Host: smtp.gmail.com
   Port: 465
-  UserName: xxxx@qq.com
-  Password: xxxxxx
+  UserName: lin020488995@gmail.com
+  Password: zckjevxjqecwjayr
   IsSSL: True
-  From: xxxx@qq.com
+  From: lin020488995@gmail.com
   To:
-    - xxxx@qq.com
+    - a4w94@yahoo.com.tw
