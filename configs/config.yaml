@@ -1,5 +1,5 @@
 Server:
-  RunMode: debug
+  RunMode: release
   HttpPort: 8000
   ReadTimeout: 60
   WriteTimeout: 60
@@ -10,6 +10,7 @@ App:
   LogSavePath: storage/logs
   LogFileName: app
   LogFileExt: .log
+  LogMaxSize: 1000
   UploadSavePath: storage/uploads
   UploadServerUrl: http://127.0.0.1:8000/static
   UploadImageMaxSize: 5 # MB

@@ -34,8 +34,9 @@ func NewRouter() *gin.Engine {
 	} else {
 		r.Use(middleware.AccessLog())
 		r.Use(middleware.Recovery())
-		r.Use(middleware.JWT())
+		//r.Use(middleware.JWT())
 	}
+	r.Use(middleware.Tracing()) //要在路由方法生成前生效
 	r.Use(middleware.RateLimiter(methodLimiters))
 	r.Use(middleware.ContextTimeout(global.AppSetting.DefaultContextTimeout))
 	r.Use(middleware.Translations())
@@ -48,7 +49,7 @@ func NewRouter() *gin.Engine {
 	r.POST("/upload/file", upload.UploadFile)
 
 	//訪問http://127.0.0.1:8000/static/ 查看所有資源
-	//長傳加密後檔名
+	//上傳加密後檔名
 	//curl -X POST http://127.0.0.1:8000/upload/file \
 	//-F file=@/Users/terry_hsiesh/Side\ Project/blog-service/storage/uploads/go.png \
 	//-F type=1

@@ -17,6 +17,7 @@ type AppSettings struct {
 	LogSavePath           string
 	LogFileName           string
 	LogFileExt            string
+	LogMaxSize            int
 	UploadSavePath        string
 	UploadServerUrl       string
 	UploadImageMaxSize    int
@@ -54,10 +55,29 @@ type EmailSettings struct {
 	To       []string
 }
 
+var sections = make(map[string]interface{})
+
+// 讀取配置文件並解析
 func (s *Setting) ReadSection(k string, v interface{}) error {
 	err := s.vp.UnmarshalKey(k, v)
 	if err != nil {
 		return err
+	}
+
+	//增加讀取section的存儲紀錄，以便在重新載入設定的方法中進行二次處理
+	if _, ok := sections[k]; !ok {
+		sections[k] = v
+	}
+	return nil
+}
+
+// 重新讀取設定
+func (s *Setting) ReloadAllSection() error {
+	for k, v := range sections {
+		err := s.ReadSection(k, v)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }

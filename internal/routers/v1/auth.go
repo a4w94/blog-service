@@ -31,7 +31,7 @@ func GetAuth(c *gin.Context) {
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		global.Logger.Errorf("app.BindAndValid err: %v", errs)
-		global.Logger.Infof("params %v", param)
+		global.Logger.Infof(c, "params %v", param)
 		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
 		response.ToErrorResponse(errRsp)
 		return

@@ -7,12 +7,28 @@ import (
 	"blog_service/pkg/email"
 	"blog_service/pkg/logger"
 	"blog_service/pkg/setting"
+	"blog_service/pkg/tracer"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/natefinch/lumberjack/v3"
+)
+
+var (
+	port    string
+	runMode string
+	config  string
+)
+
+var (
+	isVersion    bool
+	buildTime    string
+	buildVersion string
+	gitCommitID  string
 )
 
 func init() {
@@ -38,6 +54,13 @@ func init() {
 // @description 部落格建立
 // @termsOfService https://github.com/go-programing-tour-book
 func main() {
+	fmt.Printf("isVersion: %v\n", isVersion)
+	if isVersion {
+		fmt.Printf("buildTime: %s\n", buildTime)
+		fmt.Printf("buildVersion: %s\n", buildVersion)
+		fmt.Printf("gitCommitID: %s\n", gitCommitID)
+		return
+	}
 
 	//global.Logger.Infof("%s: go-programing-tour-book/%s", "eddycjy", "blog-service")
 
@@ -55,7 +78,8 @@ func main() {
 }
 
 func setupSetting() error {
-	setting, err := setting.NetSetting()
+
+	setting, err := setting.NetSetting(strings.Split(config, ",")...)
 	if err != nil {
 		return err
 	}
@@ -90,13 +114,29 @@ func setupSetting() error {
 		return err
 	}
 
-	fmt.Println("啟用email 測試")
-	//emailTest()
+	err = setupTracer()
+	if err != nil {
+		log.Fatalf("init.setupTracer err: %v", err)
+	}
+
+	err = setupFlag()
+	if err != nil {
+		log.Fatalf("init.setupFlag err: %v", err)
+	}
+
+	if port != "" {
+		global.ServerSetting.HttpPort = port
+	}
+
+	if runMode != "" {
+		global.ServerSetting.RunMode = runMode
+	}
 
 	return nil
 
 }
 
+// DB設定
 func setupDBEngine() error {
 	var err error
 	global.DBEngine, err = model.NewDBEngine(global.DatabaseSetting)
@@ -108,18 +148,18 @@ func setupDBEngine() error {
 	return nil
 }
 
+// Log檔存放位址設定
 func setupLogger() error {
 
 	fileName := global.AppSetting.LogSavePath + "/" + global.AppSetting.LogFileName + global.AppSetting.LogFileExt
-	writer, err := lumberjack.NewRoller(fileName, 600, &lumberjack.Options{
+	writer, err := lumberjack.NewRoller(fileName, int64(global.AppSetting.LogMaxSize), &lumberjack.Options{
 		MaxAge:    10,
 		LocalTime: true,
 	})
 	if err != nil {
 		log.Fatal("lumberjack failed")
 	}
-	global.Logger = logger.NewLogger(writer, "", log.LstdFlags).WithCaller(4)
-
+	global.Logger = logger.NewLogger(writer, "", log.LstdFlags).WithCaller(1)
 	return nil
 
 }
@@ -144,4 +184,26 @@ func emailTest() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func setupTracer() error {
+	jaegerTracer, _, err := tracer.NewJaegerTracer(
+		"blog-service",
+		"127.0.0.1:6831",
+	)
+	if err != nil {
+		return err
+	}
+
+	global.Tracer = jaegerTracer
+	return nil
+}
+
+func setupFlag() error {
+	flag.StringVar(&port, "port", "", "啟動通訊埠")
+	flag.StringVar(&runMode, "mode", "", "啟動模式")
+	flag.StringVar(&config, "config", "configs/", "指定要使用的設定檔路徑")
+	flag.BoolVar(&isVersion, "version", false, "編譯資訊")
+	flag.Parse()
+	return nil
 }

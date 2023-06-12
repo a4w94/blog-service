@@ -8,6 +8,8 @@ import (
 	"log"
 	"runtime"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Level int8
@@ -61,6 +63,8 @@ func (l *Logger) clone() *Logger {
 // 設定記錄檔公共欄位
 func (l *Logger) WithLevel(level Level) *Logger {
 	ll := l.clone()
+	s := fmt.Sprintf("Level:%s: ", level.String())
+	ll.newLogger.SetPrefix(s)
 
 	return ll
 }
@@ -123,6 +127,18 @@ func (l *Logger) WithCallerFrames() *Logger {
 	return ll
 }
 
+// 設定鏈路內容
+func (l *Logger) WithTrace() *Logger {
+	ginCtx, ok := l.ctx.(*gin.Context)
+	if ok {
+		return l.WithFields(Fields{
+			"trace_id": ginCtx.MustGet("X-Trace-ID"),
+			"span_id":  ginCtx.MustGet("X-Span-ID"),
+		})
+	}
+	return l
+}
+
 // 記錄檔內容格式化為json
 func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} {
 	data := make(Fields, len(l.fields)+4)
@@ -145,10 +161,12 @@ func (l *Logger) JSONFormat(level Level, message string) map[string]interface{} 
 func (l *Logger) Output(level Level, message string) {
 	body, _ := json.Marshal(l.JSONFormat(level, message))
 	content := string(body)
+
 	switch level {
 	case LevelDebug:
 		l.newLogger.Print(content)
 	case LevelInfo:
+
 		l.newLogger.Print(content)
 	case LevelWarn:
 		l.newLogger.Print(content)
@@ -162,11 +180,15 @@ func (l *Logger) Output(level Level, message string) {
 	}
 }
 
-func (l *Logger) Info(v ...interface{}) {
+func (l *Logger) Info(ctx context.Context, v ...interface{}) {
+	l = l.WithLevel(LevelInfo).WithContext(ctx).WithTrace()
 	l.Output(LevelInfo, fmt.Sprint(v...))
 }
 
-func (l *Logger) Infof(format string, v ...interface{}) {
+func (l *Logger) Infof(ctx context.Context, format string, v ...interface{}) {
+
+	l = l.WithLevel(LevelInfo).WithContext(ctx).WithTrace()
+
 	l.Output(LevelInfo, fmt.Sprintf(format, v...))
 }
 
@@ -200,4 +222,9 @@ func (l *Logger) Panic(v ...interface{}) {
 
 func (l *Logger) Panicf(format string, v ...interface{}) {
 	l.Output(LevelPanic, fmt.Sprintf(format, v...))
+}
+
+// !尚未完成 如何引入global.AppSetting的MaxSize參數
+func checktMsgLen(msg string) bool {
+	return len([]byte(msg)) <= 1000
 }

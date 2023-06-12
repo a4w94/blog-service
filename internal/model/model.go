@@ -7,6 +7,7 @@ import (
 	"log"
 	"time"
 
+	otgorm "github.com/eddycjy/opentracing-gorm"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -59,6 +60,9 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettings) (*gorm.DB, error) {
 
 	db.DB().SetMaxIdleConns(databaseSetting.MaxIdleConns)
 	db.DB().SetMaxOpenConns(databaseSetting.MaxOpenConns)
+
+	//新增opentrancing註冊回呼
+	otgorm.AddGormCallbacks(db)
 
 	return db, nil
 

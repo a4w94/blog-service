@@ -40,8 +40,8 @@ func AccessLog() gin.HandlerFunc {
 			"response": bodyWriter.body.String(),    //請求結果回應主體
 		}
 
-		//!log 使用WithFields無法生成log
-		global.Logger.WithFields(fields).Infof("access log: method: %s, status_code: %d,begin_time: %d, end_time: %d",
+		s := "access log: method: %s, status_code: %d,begin_time: %d, end_time: %d"
+		global.Logger.WithFields(fields).Infof(c, s,
 			c.Request.Method, //呼叫方法
 			bodyWriter.Status(),
 			beginTime,
