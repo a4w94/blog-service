@@ -18,3 +18,15 @@ app_secret:blog-service
 //go-bindata 包裝設定檔.資源檔進go程式
 //-o 指定路徑 -pkg 指定包名
 $ go-bindata -o configs/config.go -pkg=configs configs/config.yaml
+
+//壓縮執行檔
+$ upx {執行檔名稱}
+//非必要壓縮方式
+$ go build -ldflags="-w -s"
+-w :去除DWARF偵錯資訊，panic拋出時，呼叫堆疊資訊沒有檔名，行號資訊
+-s :去除符號資訊，無法使用gdb偵錯
+
+//將編譯時間 版本編號 git hash寫入二進位執行檔
+$ go build -ldflags "-X main.buildTime=`date +%Y-%m-%d,%H:%M:%S` -X main.buildVersion=1.0.0 -X main.gitCommitID=`git rev-parse origin`"
+//執行 並賦值給isVersion(flag name:version)
+$ ./blog_service -version

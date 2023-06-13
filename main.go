@@ -8,11 +8,15 @@ import (
 	"blog_service/pkg/logger"
 	"blog_service/pkg/setting"
 	"blog_service/pkg/tracer"
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/natefinch/lumberjack/v3"
@@ -59,7 +63,7 @@ func main() {
 		fmt.Printf("buildTime: %s\n", buildTime)
 		fmt.Printf("buildVersion: %s\n", buildVersion)
 		fmt.Printf("gitCommitID: %s\n", gitCommitID)
-		return
+		//return
 	}
 
 	//global.Logger.Infof("%s: go-programing-tour-book/%s", "eddycjy", "blog-service")
@@ -72,11 +76,32 @@ func main() {
 		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
-	log.Printf("Url: http://127.0.0.1:%s", global.ServerSetting.HttpPort)
-	s.ListenAndServe()
+	go func() {
+		log.Printf("Url: http://127.0.0.1:%s", global.ServerSetting.HttpPort)
+		err := s.ListenAndServe()
+		if err != nil && err != http.ErrServerClosed {
+			log.Fatalf("s.ListenAndServe err: %v", err)
+		}
+	}()
 
+	//等待中斷訊號
+	quit := make(chan os.Signal)
+	//接收syscall.SIGINT和syscall.SIGTERM信號綁定在quit上
+	//SIGINT 終端or控制台發送的中斷訊號（ctrl+C)
+	//SIGTERM 終止訊號，用於通知程式要求正常終止
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Println("Shutdown Server ...")
+
+	//最大時間控制，用於通知該服務端它有5s的時間來處理原有的請求
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := s.Shutdown(ctx); err != nil {
+		log.Fatal("Server Shutdown:", err)
+	}
+
+	log.Println("Server exiting")
 }
-
 func setupSetting() error {
 
 	setting, err := setting.NetSetting(strings.Split(config, ",")...)
