@@ -9,6 +9,15 @@ definitions:
         type: integer
     type: object
   errorcode.Error:
+    properties:
+      code:
+        type: integer
+      details:
+        items:
+          type: string
+        type: array
+      msg:
+        type: string
     type: object
   model.Tag:
     properties:
@@ -91,28 +100,25 @@ paths:
     post:
       parameters:
       - description: 標籤名稱
-        in: body
+        in: query
         maxLength: 100
         name: name
         required: true
-        schema:
-          type: string
+        type: string
       - default: 1
         description: 狀態
         enum:
         - 0
         - 1
-        in: body
+        in: query
         name: state
-        schema:
-          type: integer
+        type: integer
       - description: 建立者
-        in: body
+        in: query
         maxLength: 100
         name: created_by
         required: true
-        schema:
-          type: string
+        type: string
       produces:
       - application/json
       responses:

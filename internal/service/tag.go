@@ -1,8 +1,10 @@
 package service
 
 import (
+	"blog_service/global"
 	"blog_service/internal/model"
 	"blog_service/pkg/app"
+	"blog_service/pkg/errorcode"
 )
 
 type CountTagRequest struct {
@@ -41,6 +43,17 @@ func (svc *Service) GetTagList(param *TagListRequest, pager *app.Pager) ([]*mode
 }
 
 func (svc *Service) CreateTag(param *CreateTagRequest) error {
+	//判斷標籤是否存在
+	count, err := svc.dao.CountTag(param.Name, param.State)
+	if err != nil {
+		global.Logger.Errorf("svc.dao.CountTag err: %v", err)
+		return err
+	}
+	if count > 0 {
+		global.Logger.Errorf("create tag failed, tag already exists")
+		return errorcode.ErrorTagAlreadyExist
+	}
+
 	return svc.dao.CreateTag(param.Name, param.State, param.CreatedBy)
 }
 

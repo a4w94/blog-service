@@ -72,9 +72,9 @@ func (r Tag) List(c *gin.Context) {
 
 // @Summary 新增標籤
 // @Produce json
-// @Param name body string true "標籤名稱" minlenght(3) maxlength(100)
-// @Param state body int false "狀態" Enums(0,1) default(1)
-// @Param created_by body  string true "建立者" minlenght(3) maxlength(100)
+// @Param name query string true "標籤名稱" minlenght(3) maxlength(100)
+// @Param state query int false "狀態" Enums(0,1) default(1)
+// @Param created_by query  string true "建立者" minlenght(3) maxlength(100)
 // @Success 200 {object} model.TagSwagger "成功"
 // @Failure 400 {object} errorcode.Error "請求錯誤"
 // @Failure 500 {object} errorcode.Error "內部錯誤"

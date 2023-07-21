@@ -1,0 +1,1 @@
+Level:info: 2023/07/12 16:20:17 {"callers":["/Users/terry_hsiesh/SideProject/blog-service/main.go: 187 main.setupLogger"],"level":"info","message":"access log: method: GET, status_code: 404,begin_time: 1689150017, end_time: 1689150017","request":"","response":"","span_id":"37378f01f46a2e77","time":1689150017507123000,"trace_id":"37378f01f46a2e77"}
