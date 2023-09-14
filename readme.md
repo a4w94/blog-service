@@ -74,3 +74,5 @@ go get -u github.com/swaggo/swag/cmd/swag
 export PATH=$PATH:/Users/terry_hsiesh/go/bin
 test
 new 2
+
+maintest
