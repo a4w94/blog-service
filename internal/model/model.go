@@ -64,6 +64,8 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettings) (*gorm.DB, error) {
 	//新增opentrancing註冊回呼
 	otgorm.AddGormCallbacks(db)
 
+	migrateDB(db)
+
 	return db, nil
 
 }

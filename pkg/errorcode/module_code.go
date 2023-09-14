@@ -10,3 +10,12 @@ var (
 
 	ErrorUploadFileFail = NewError(20030001, "上傳檔案失敗")
 )
+
+var (
+	ErrorGetArticleListFail = NewError(20020001, "取得文章列表失敗")
+	ErrorCreateArticleFail  = NewError(20020002, "建立文章失敗")
+	ErrorUpdateArticleFail  = NewError(20020003, "更新文章失敗")
+	ErrorDeleteArticleFail  = NewError(20020004, "删除文章失敗")
+	ErrorCountArticleFail   = NewError(20020005, "計算文章數量失敗")
+	ErrorGetArticleFail     = NewError(20020006, "取得文章失敗")
+)

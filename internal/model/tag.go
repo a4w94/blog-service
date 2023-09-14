@@ -8,14 +8,18 @@ import (
 
 type Tag struct {
 	*Model
-	Name   string      `json:"name"`
-	State  uint8       `json:"state"`
-	Conent interface{} `gorm:"-"`
+	Name    string      `json:"name"`  //標籤名稱
+	State   uint8       `json:"state"` //狀態 0:關閉 1:開啟
+	Content interface{} `gorm:"-"`     //暫存欄位
 }
 
 type TagSwagger struct {
 	List  []*Tag
 	Pager *app.Pager
+}
+
+func NewTag() *Tag {
+	return &Tag{}
 }
 
 func (t Tag) TableName() string {
@@ -58,8 +62,9 @@ func (t Tag) List(db *gorm.DB, pageOffset, pageSize int) ([]*Tag, error) {
 }
 
 func (t Tag) Create(db *gorm.DB) error {
-
-	return db.Create(&t).Error
+	return WithTransaction(db, func(tx *gorm.DB) error {
+		return tx.Create(&t).Error
+	})
 }
 
 func (t Tag) Update(db *gorm.DB, values interface{}) error {

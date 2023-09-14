@@ -46,11 +46,11 @@ func (svc *Service) CreateTag(param *CreateTagRequest) error {
 	//判斷標籤是否存在
 	count, err := svc.dao.CountTag(param.Name, param.State)
 	if err != nil {
-		global.Logger.Errorf("svc.dao.CountTag err: %v", err)
+		global.Logger.Errorf("svc.dao.CountTag failed to count tag,err: %v", err)
 		return err
 	}
 	if count > 0 {
-		global.Logger.Errorf("create tag failed, tag already exists")
+		global.Logger.Errorf("failed to create tag: tag %s with state %d already exists", param.Name, param.State)
 		return errorcode.ErrorTagAlreadyExist
 	}
 

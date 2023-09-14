@@ -12,8 +12,8 @@ import (
 )
 
 type Tag struct {
-	Name    string
-	Content interface{}
+	Name    string      //標籤名稱
+	Content interface{} //暫存欄位
 }
 
 func NewTag() Tag {

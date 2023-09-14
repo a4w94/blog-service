@@ -6,6 +6,10 @@ type ArticleTag struct {
 	ArticleID uint32 `json:"article_id"`
 }
 
+func NewArticleTag() *ArticleTag {
+	return &ArticleTag{}
+}
+
 func (a ArticleTag) TableName() string {
 	return "blog_article_tag"
 }
