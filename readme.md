@@ -68,4 +68,4 @@ $ go build -ldflags "-X main.buildTime=`date +%Y-%m-%d,%H:%M:%S` -X main.buildVe
 //執行 並賦值給isVersion(flag name:version)
 $ ./blog_service -version test
 
-test
+plot 1
