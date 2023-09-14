@@ -76,4 +76,4 @@ test
 new 2
 
 maintest
-new 4
+new 2
