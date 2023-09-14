@@ -67,3 +67,5 @@ $ go build -ldflags="-w -s"
 $ go build -ldflags "-X main.buildTime=`date +%Y-%m-%d,%H:%M:%S` -X main.buildVersion=1.0.0 -X main.gitCommitID=`git rev-parse origin`"
 //執行 並賦值給isVersion(flag name:version)
 $ ./blog_service -version test
+
+test
