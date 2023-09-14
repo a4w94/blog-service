@@ -72,3 +72,4 @@ $ ./blog_service -version test
 http://127.0.0.1:8000/swagger/index.html
 go get -u github.com/swaggo/swag/cmd/swag
 export PATH=$PATH:/Users/terry_hsiesh/go/bin
+test
