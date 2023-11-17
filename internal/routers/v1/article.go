@@ -61,7 +61,19 @@ func (a Article) Create(c *gin.Context) {
 
 }
 func (a Article) Update(c *gin.Context) {
+	fmt.Println("CreateArticle")
+	param := service.CreateArticleRequest{}
+	response := app.NewResponse(c)
 
+	//參數校正綁定
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid err:%v", errs)
+		errRsp := errorcode.InvalidParams.WithDetails(errs.Error())
+		response.ToErrorResponse(errRsp)
+		return
+	}
+	fmt.Println("param", param)
 }
 func (a Article) Delete(c *gin.Context) {
 
