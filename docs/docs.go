@@ -24,6 +24,48 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/articles": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "新增文章",
+                "parameters": [
+                    {
+                        "description": "文章資料",
+                        "name": "createArticleRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/service.CreateArticleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "$ref": "#/definitions/model.TagSwagger"
+                        }
+                    },
+                    "400": {
+                        "description": "請求錯誤",
+                        "schema": {
+                            "$ref": "#/definitions/errorcode.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "內部錯誤",
+                        "schema": {
+                            "$ref": "#/definitions/errorcode.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/tags": {
             "get": {
                 "produces": [
@@ -279,7 +321,9 @@ var doc = `{
         "model.Tag": {
             "type": "object",
             "properties": {
-                "conent": {},
+                "content": {
+                    "description": "暫存欄位"
+                },
                 "created_by": {
                     "type": "string"
                 },
@@ -302,9 +346,11 @@ var doc = `{
                     "type": "integer"
                 },
                 "name": {
+                    "description": "標籤名稱",
                     "type": "string"
                 },
                 "state": {
+                    "description": "狀態 0:關閉 1:開啟",
                     "type": "integer"
                 }
             }
@@ -320,6 +366,49 @@ var doc = `{
                 },
                 "pager": {
                     "$ref": "#/definitions/app.Pager"
+                }
+            }
+        },
+        "service.CreateArticleRequest": {
+            "type": "object",
+            "required": [
+                "author",
+                "category",
+                "content",
+                "publish_date",
+                "tags",
+                "title"
+            ],
+            "properties": {
+                "author": {
+                    "type": "string"
+                },
+                "category": {
+                    "description": "文章分類",
+                    "type": "string"
+                },
+                "content": {
+                    "description": "文章內容",
+                    "type": "string"
+                },
+                "publish_date": {
+                    "description": "文章作者",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "文章狀態",
+                    "type": "integer"
+                },
+                "tags": {
+                    "description": "文章標籤",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "description": "文章標題",
+                    "type": "string"
                 }
             }
         }

@@ -21,7 +21,8 @@ definitions:
     type: object
   model.Tag:
     properties:
-      conent: {}
+      content:
+        description: 暫存欄位
       created_by:
         type: string
       created_on:
@@ -37,8 +38,10 @@ definitions:
       modified_on:
         type: integer
       name:
+        description: 標籤名稱
         type: string
       state:
+        description: 狀態 0:關閉 1:開啟
         type: integer
     type: object
   model.TagSwagger:
@@ -50,6 +53,38 @@ definitions:
       pager:
         $ref: '#/definitions/app.Pager'
     type: object
+  service.CreateArticleRequest:
+    properties:
+      author:
+        type: string
+      category:
+        description: 文章分類
+        type: string
+      content:
+        description: 文章內容
+        type: string
+      publish_date:
+        description: 文章作者
+        type: string
+      state:
+        description: 文章狀態
+        type: integer
+      tags:
+        description: 文章標籤
+        items:
+          type: string
+        type: array
+      title:
+        description: 文章標題
+        type: string
+    required:
+    - author
+    - category
+    - content
+    - publish_date
+    - tags
+    - title
+    type: object
 info:
   contact: {}
   description: 部落格建立
@@ -57,6 +92,33 @@ info:
   title: 部落格系統
   version: "1.0"
 paths:
+  /api/v1/articles:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 文章資料
+        in: body
+        name: createArticleRequest
+        required: true
+        schema:
+          $ref: '#/definitions/service.CreateArticleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.TagSwagger'
+        "400":
+          description: 請求錯誤
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+        "500":
+          description: 內部錯誤
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+      summary: 新增文章
   /api/v1/tags:
     get:
       parameters:

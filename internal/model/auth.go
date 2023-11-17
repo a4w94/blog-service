@@ -8,6 +8,10 @@ type Auth struct {
 	AppSecret string `json:"app_secret"`
 }
 
+func NewAuth() *Auth {
+	return &Auth{}
+}
+
 func (a Auth) TableName() string {
 	return "blog_auth"
 }
